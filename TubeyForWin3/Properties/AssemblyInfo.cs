@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TubeyForWin3")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TubeyNET")]
+[assembly: AssemblyDescription("a simple .NET WPF wrapper around the TFL JSON API")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TubeyForWin3")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("man machine software inbetween")]
+[assembly: AssemblyProduct("TubeyNET")]
+[assembly: AssemblyCopyright("Copyright manmachinesoftwareinbetween ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

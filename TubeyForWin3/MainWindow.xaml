@@ -1,10 +1,10 @@
 ﻿<Window x:Class="TubeyForWin3.MainWindow"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       Title="TubeyNET" Height="350" Width="525">
+       Title="TubeyNET" Height="350" Width="525" Icon="tubeyico.ico">
     <Grid>
         <DataGrid x:Name="Grid1" IsReadOnly="True"
-         AutoGenerateColumns="False" Margin="15,0,5,53" VerticalAlignment="Center" >
+         AutoGenerateColumns="False" Margin="15,0,5,53" VerticalAlignment="Center" IsEnabled="False" >
             <DataGrid.Resources>
                 <Style x:Key="MyStyle" TargetType="DataGridCell">
                     <Setter Property="Background" Value="White"></Setter>
@@ -14,6 +14,9 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SeverityDescription}" Value="Minor Delays">
                             <Setter Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SeverityDescription}" Value="Severe Delays">
+                            <Setter Property="Background" Value="#FFF08787"/>
                         </DataTrigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter x:Name="Status" Property="Background" Value="Gray"/>
