@@ -68,7 +68,6 @@ namespace TubeyForWin3
             if (handle) Handle();
             handle = true;
         }
-
         private void wombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
@@ -112,7 +111,7 @@ namespace TubeyForWin3
                     checkten = true;
                     checktwenty = true;
                     checkthirty = false;
-                    TimeThirtyDispatch();
+                    TimeThirtyDispatch();                    
                     break;
 
             }
@@ -129,7 +128,7 @@ namespace TubeyForWin3
         private void Timer_Tick_Five(object sender, EventArgs e)
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickCount == 3) //if the timer equals 300 seconds
+            if (++TimerTickCount == 300) //if the timer equals 300 seconds
             {
 
                 if (check) //if the timer is true, kill it!
