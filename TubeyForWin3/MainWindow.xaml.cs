@@ -78,7 +78,7 @@ namespace TubeyForWin3
         }
         private void Handle()
         {
-            switch (wombo.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last()) //
+            switch (wombo.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last())
             {
                 case "off":
                     check = true;
@@ -94,23 +94,25 @@ namespace TubeyForWin3
                     TimeFiveDispatch();
                     break;
                 case "10 Minutes":
-                    TimeTenDispatch();
                     check = true;
                     checkten = false;
                     checktwenty = true;
                     checkthirty = true;
+                    TimeTenDispatch();
                     break;
                 case "20 Minutes":
                     check = true;
                     checkten = true;
                     checktwenty = false;
                     checkthirty = true;
+                    TimeTwenityDispatch();
                     break;
                 case "30 Minutes":
                     check = true;
                     checkten = true;
                     checktwenty = true;
                     checkthirty = false;
+                    TimeThirtyDispatch();
                     break;
 
             }
@@ -127,10 +129,10 @@ namespace TubeyForWin3
         private void Timer_Tick_Five(object sender, EventArgs e)
         {
             DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickCount == 300) //if the timer equals 300 seconds
+            if (++TimerTickCount == 3) //if the timer equals 300 seconds
             {
 
-                if (check == true) //if the timer is true, kill it!
+                if (check) //if the timer is true, kill it!
                 {
                     timer.Stop();
                     return;
