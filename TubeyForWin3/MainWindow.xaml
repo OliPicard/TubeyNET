@@ -18,6 +18,9 @@
                         <DataTrigger Binding="{Binding SeverityDescription}" Value="Severe Delays">
                             <Setter Property="Background" Value="#FFF08787"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding SeverityDescription}" Value="Part Suspended">
+                            <Setter Property="Background" Value="SandyBrown"></Setter>
+                        </DataTrigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter x:Name="Status" Property="Background" Value="Gray"/>
                         </Trigger>
@@ -33,5 +36,12 @@
         <Button Content="Refresh" Margin="215,271,227,0" Height="20" VerticalAlignment="Bottom" Click="Button_Click"/>
         <Label x:Name="Status" Content="" HorizontalAlignment="Right" Margin="0,0,53,9" VerticalAlignment="Bottom" IsEnabled="False"/>
         <Label Content="Created with &lt;3 by OliPicard" HorizontalAlignment="Left" Margin="2,267,0,0" VerticalAlignment="Bottom" Opacity="0.3"/>
+        <ComboBox x:Name="wombo" HorizontalAlignment="Left" Margin="10,0,0,26" VerticalAlignment="Bottom" Width="120" IsReadOnly="True" DropDownClosed="wombo_DropDownClosed" SelectionChanged="wombo_SelectionChanged">
+            <ComboBoxItem Content="off" IsSelected="True"></ComboBoxItem>
+            <ComboBoxItem Content="5 Minutes"></ComboBoxItem>
+            <ComboBoxItem Content="10 Minutes"></ComboBoxItem>
+            <ComboBoxItem Content="20 Minutes"></ComboBoxItem>
+            <ComboBoxItem Content="30 Minutes"></ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Window>
