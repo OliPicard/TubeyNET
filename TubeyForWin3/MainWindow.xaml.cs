@@ -27,6 +27,7 @@ namespace TubeyForWin3
     /// Without you TubeyNet Wouldn't have been made possible.
     /// mtj23 (Thanks for helping me setup the classes, basic logic of WPF and contiune to inspire me!)
     /// XVar (Thanks for the WPF magic you did with allowing me to display only certain collums in color codes.)
+    /// Suchiman - For making the timing module suck less. I did it for Nic Cage!
     /// Developed with <3 by OliPicard - github.com/olipicard/
     /// </credits>
     /// <summary>
@@ -77,156 +78,64 @@ namespace TubeyForWin3
         }
         private void Handle()
         {
-            switch (wombo.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last())
+            string selection = wombo.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last();
+            if (selection == "off")
             {
-                case "off":
-                    check = true;
-                    checkten = true;
-                    checktwenty = true;
-                    checkthirty = true;
-                    break;
-                case "5 Minutes":
-                    check = false;
-                    checkten = true;
-                    checktwenty = true;
-                    checkthirty = true;
-                    TimeFiveDispatch();
-                    break;
-                case "10 Minutes":
-                    check = true;
-                    checkten = false;
-                    checktwenty = true;
-                    checkthirty = true;
-                    TimeTenDispatch();
-                    break;
-                case "20 Minutes":
-                    check = true;
-                    checkten = true;
-                    checktwenty = false;
-                    checkthirty = true;
-                    TimeTwenityDispatch();
-                    break;
-                case "30 Minutes":
-                    check = true;
-                    checkten = true;
-                    checktwenty = true;
-                    checkthirty = false;
-                    TimeThirtyDispatch();                    
-                    break;
-
+                ConfigureTimer(0);
+                return;
             }
-
-        }
-        private int TimerTickCount = 0;
-        private void TimeFiveDispatch()
-        {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += new EventHandler(Timer_Tick_Five);
-            timer.Start();
-        }
-        private void Timer_Tick_Five(object sender, EventArgs e)
-        {
-            DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickCount == 300) //if the timer equals 300 seconds
+            if (selection == "5 Minutes")
             {
-
-                if (check) //if the timer is true, kill it!
-                {
-                    timer.Stop();
-                    return;
-                }
-                else
-                {
-                    timer.Stop(); //stop the timer
-                    Get(); //get data                    
-                    TimerTickCount = 0; //reset the counter
-                    timer.Start(); //start timer.
-                }
+                ConfigureTimer(5);
+                return;
+            }
+            if (selection == "10 Minutes")
+            {
+                ConfigureTimer(10);
+                return;
+            }
+            if (selection == "20 Minutes")
+            {
+                ConfigureTimer(20);
+                return;
+            }
+            if (selection == "30 Minutes")
+            {
+                ConfigureTimer(30);
+                return;
+            }
+ 
+            int intervall = Int32.Parse(selection.Remove(2).TrimEnd());
+            ConfigureTimer(intervall);
+            Get();
 
 
-            }
         }
-        int TimerTickTenCount = 0;
-        private void TimeTenDispatch()
+        private DispatcherTimer UpdateTimer;
+        private void ConfigureTimer(int minuteIntervall)
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += new EventHandler(Timer_Tick_Ten);
-            timer.Start();
-        }
-        private void Timer_Tick_Ten(object sender, EventArgs e)
-        {
-            DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickTenCount == 600)
+            //initialize the timer if it didn't happen before
+            if (UpdateTimer == null)
             {
-                if (checkten == true)
-                {
-                    timer.Stop();
-                    return;
-                }
-                else
-                {
-                    timer.Stop();
-                    Get();                  
-                    TimerTickTenCount = 0;
-                    timer.Start(); 
-                }
+                UpdateTimer = new DispatcherTimer();
+                UpdateTimer.Tick += (sender, e) => Get();
             }
-        }
-        int TimerTickTwentyCount = 0;
-        private void TimeTwenityDispatch()
-        {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += new EventHandler(Timer_Tick_Twenty);
-            timer.Start();
-        }
-        private void Timer_Tick_Twenty(object sender, EventArgs e)
-        {
-            DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickTwentyCount == 1200) 
+
+            //if the timer is running stop it
+            if (UpdateTimer.IsEnabled)
             {
-                if (checktwenty == true)
-                {
-                    timer.Stop();
-                    return;
-                }
-                else
-                {
-                    timer.Stop();
-                    Get();                
-                    TimerTickTwentyCount = 0;
-                    timer.Start(); 
-                }
+                UpdateTimer.Stop();
             }
-        }
-        int TimerTickThirtyCount = 0;
-        private void TimeThirtyDispatch()
-        {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += new EventHandler(Timer_Tick_Thrity);
-            timer.Start();
-        }
-        private void Timer_Tick_Thrity(object sender, EventArgs e)
-        {
-            DispatcherTimer timer = (DispatcherTimer)sender;
-            if (++TimerTickThirtyCount == 1800) 
+
+            //if no intervall is requested quit here since the timer is already stopped
+            if (minuteIntervall <= 0)
             {
-                if (checkthirty == true)
-                {
-                    timer.Stop();
-                    return;                
-                }                
-                else
-                {
-                    timer.Stop();
-                    Get();              
-                    TimerTickTwentyCount = 0;
-                    timer.Start(); 
-                }
+                return;
             }
-        }
+
+            //configure new intervall and restart timer
+            UpdateTimer.Interval = TimeSpan.FromMinutes(minuteIntervall);
+            UpdateTimer.Start();
+        }   
     }
 }

@@ -20,7 +20,9 @@ This software is licensed under the MIT License (Included in the Github repo.)
 
 <h3>Credits</h3>
 **Many Thanks to the following people, Without there support and help this project wouldn't have come off the ground.**
+
 mtj23 - for providing the guidance on the model types, WPF implementation and Classes and custom JSON deserialization.
+
 XVar - Awesome WPF custom columns implementation with grid.
 
 Voldenet - for helping me figure out how to get certain attributes from a JObject collection.
