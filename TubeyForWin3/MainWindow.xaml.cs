@@ -84,32 +84,9 @@ namespace TubeyForWin3
                 ConfigureTimer(0);
                 return;
             }
-            if (selection == "5 Minutes")
-            {
-                ConfigureTimer(5);
-                return;
-            }
-            if (selection == "10 Minutes")
-            {
-                ConfigureTimer(10);
-                return;
-            }
-            if (selection == "20 Minutes")
-            {
-                ConfigureTimer(20);
-                return;
-            }
-            if (selection == "30 Minutes")
-            {
-                ConfigureTimer(30);
-                return;
-            }
- 
-            int intervall = Int32.Parse(selection.Remove(2).TrimEnd());
+            int intervall = Int32.Parse(selection.Remove(2).TrimEnd()); //grabs selection from string, trim end removes whitespace and select remove 2 removes the space the the minutes.
             ConfigureTimer(intervall);
             Get();
-
-
         }
         private DispatcherTimer UpdateTimer;
         private void ConfigureTimer(int minuteIntervall)
