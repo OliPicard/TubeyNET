@@ -27,4 +27,6 @@ XVar - Awesome WPF custom columns implementation with grid.
 
 Voldenet - for helping me figure out how to get certain attributes from a JObject collection.
 
+Suchiman - for fixing the timer module.
+
 Newtonsoft JSON.net - for providing an awesome JSON Deseraliser Library.
